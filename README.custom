@@ -7,3 +7,4 @@ make
 The cfg file is from:
 https://github.com/sifive/freedom-e-sdk/blob/master/bsp/env/freedom-e300-arty/openocd.cfg
 
+You may need to alter the "-expected-id" line in bsp_env_freedom-e300-arty_openocd.cfg if the core has a different IDCODE. It defaults to 0x1 which is the post-April(?) 2017 rocket-chip default if you don't specify one.
