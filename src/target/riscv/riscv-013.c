@@ -987,6 +987,12 @@ static int examine(struct target *target)
 	info->abits = get_field(dtmcontrol, DTM_DTMCS_ABITS);
 	info->dtmcontrol_idle = get_field(dtmcontrol, DTM_DTMCS_IDLE);
 
+	// For 194 diagnostics
+	uint32_t sbd3 = dmi_read(target, DMI_SBDATA3);
+	LOG_INFO("DMI_SBDATA3=0x%x", sbd3);
+	uint32_t sbd2 = dmi_read(target, DMI_SBDATA2);
+	LOG_INFO("DMI_SBDATA2=0x%x", sbd2);
+
 	uint32_t dmcontrol = dmi_read(target, DMI_DMCONTROL);
 	uint32_t dmstatus = dmi_read(target, DMI_DMSTATUS);
 	if (get_field(dmstatus, DMI_DMSTATUS_VERSIONLO) != 2) {
