@@ -9,7 +9,7 @@ class OpenOCDError(Exception):
     pass
 
 MESSAGE_PROMPT = "client> "
-DEBUG = True
+DEBUG = False
 
 def debug(msg):
     if DEBUG:
