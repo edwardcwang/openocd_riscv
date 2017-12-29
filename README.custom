@@ -1,0 +1,9 @@
+Custom notes.
+
+./configure --disable-werror --enable-jtag_vpi
+make
+
+./src/openocd -d -s ./tcl -f bsp_env_freedom-e300-arty_openocd.cfg
+The cfg file is from:
+https://github.com/sifive/freedom-e-sdk/blob/master/bsp/env/freedom-e300-arty/openocd.cfg
+
