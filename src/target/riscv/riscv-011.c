@@ -1448,6 +1448,35 @@ static int step(struct target *target, int current, target_addr_t address,
 	return ERROR_OK;
 }
 
+// Writes & reads the debug RAM to test it.
+// Invalidates the cache.
+// num_times: number of times to run the test
+static void debug_ram_test(struct target *target, const int num_times)
+{
+	int num_rams = 7; // number of rams to test (e.g. 0x0 to 0x6 would have num_rams = 7)
+
+	int data = 0;
+
+	LOG_DEBUG("Trying to read & write dbus ram");
+	for (int qq = 0; qq < num_times; qq++) {
+		for (int addr = 0; addr < num_rams; addr++) {
+			dbus_write(target, addr, data);
+			int read_data = dbus_read(target, addr);
+			
+			if (data != read_data) {
+				LOG_ERROR("Debug ram test failed: at addr 0x%x, wrote %d, read %d", addr, data, read_data);
+			} else {
+				LOG_DEBUG("Addr %d, wrote %d, read %d", addr, data, read_data);
+			}
+
+			// Update the data.
+			data = data + 1;
+		}
+	}
+	LOG_DEBUG("End read & write dbus ram");
+	cache_invalidate(target);
+}
+
 static int examine(struct target *target)
 {
 	/* Don't need to select dbus, since the first thing we do is read dtmcontrol. */
