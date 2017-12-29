@@ -1461,6 +1461,10 @@ static void debug_ram_test(struct target *target, const int num_times)
 	for (int qq = 0; qq < num_times; qq++) {
 		for (int addr = 0; addr < num_rams; addr++) {
 			dbus_write(target, addr, data);
+			dbus_read(target, addr);
+			// Throw away the results of the first read, since it'll contain the
+			// result of the previous read request.
+			// See cache_write().
 			int read_data = dbus_read(target, addr);
 			
 			if (data != read_data) {
