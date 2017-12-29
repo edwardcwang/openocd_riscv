@@ -1,5 +1,6 @@
 Custom notes.
 
+./bootstrap
 ./configure --disable-werror --enable-jtag_vpi
 make
 
