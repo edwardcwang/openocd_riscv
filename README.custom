@@ -1,5 +1,7 @@
 Custom notes.
 
+Pre-requisities for Ubuntu 16.04: `sudo apt-get install libtool autoconf libusb-1.0-0-dev`
+
 ./bootstrap
 ./configure --disable-werror --enable-jtag_vpi
 make
